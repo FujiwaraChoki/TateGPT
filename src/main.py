@@ -20,7 +20,7 @@ def check_status(inference_job_token: str):
 
 def generate_random_token():
     # Generate a random token
-    letters = "abcdefghijklmnopqrstuvwxyz0123456789[]{}"
+    letters = "abcdefghijklmnopqrstuvwxyz0123456789_"
     token = ""
 
     for _ in range(0, 30):
@@ -71,7 +71,7 @@ def say(text):
         print("Status: " + status)
 
     # Download the audio file
-    url = f"https://storage.googleapis.com/vocodes-public/{public_url}"
+    url = f"https://storage.googleapis.com/vocodes-public{public_url}"
 
     print("Available at: " + public_url)
     print("Raw: " + url)
