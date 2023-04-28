@@ -1,8 +1,26 @@
 import speech_recognition as sr
 import requests
 import random
+import openai
 import time
 import os
+
+
+def generate_answer(prompt):
+    openai.api_key = "YOUR_API_KEY"
+
+    model_engine = "davinci"  # Use the davinci model
+
+    prompt = "Answer the following:\n" + prompt
+
+    # Generate an answer from OpenAI's GPT-3 model
+    response = openai.Completion.create(
+        engine=model_engine,
+        prompt=prompt,
+        max_tokens=1024,
+    )
+
+    return response.choices[0].text
 
 
 def check_status(inference_job_token: str):
@@ -94,7 +112,9 @@ def main():
     try:
         response_text = r.recognize_google(audio)
 
-        say(response_text)
+        gpt_response = generate_answer(response_text)
+
+        say(gpt_response)
 
     except sr.UnknownValueError:
         say("Sorry, I could not understand what you said.")
